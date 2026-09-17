@@ -320,6 +320,55 @@ table.ledger{border-collapse:collapse; width:100%; min-width:760px; font-size:15
 .versions ul{margin:0; padding-left:1.1em; font-size:15px}
 dl.method dt{font-weight:700; margin-top:14px} dl.method dd{margin:2px 0 0; max-width:var(--measure); color:var(--ink-2)}
 @media (prefers-reduced-motion:reduce){ *{transition:none!important} }
+
+/* how full each generation is */
+.fillstrip{display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,124px),1fr)); gap:10px 16px; margin:14px 0 0}
+.fillstrip > div{font-size:13px; line-height:1.35; color:var(--ink-3)}
+.fillstrip .bar{height:7px; background:var(--rule-2); border-radius:4px; overflow:hidden; margin:5px 0 4px}
+.fillstrip .bar i{display:block; height:100%; background:var(--mother)}
+table.band td.n, table.band th.n, table.compare td.n, table.compare th.n, table.doors td.n, table.doors th.n{text-align:right; font-variant-numeric:tabular-nums}
+table.doors .rowbar{display:flex; align-items:center; gap:8px; justify-content:flex-end}
+table.doors .rowbar i{display:block; height:10px; border-radius:2px; background:var(--mother); min-width:2px}
+/* where the lines stop */
+.walls{columns:2 17rem; column-gap:30px; list-style:none; margin:12px 0 0; padding:0}
+.walls li{break-inside:avoid; padding:7px 0; border-bottom:1px solid var(--rule-2); font-size:15px}
+.walls .m{display:block; font-size:13.5px; color:var(--ink-3)}
+/* graves */
+.graves{list-style:none; margin:12px 0 0; padding:0; display:grid; grid-template-columns:repeat(auto-fill,minmax(min(100%,17rem),1fr)); gap:0 30px}
+.graves li{padding:12px 0; border-bottom:1px solid var(--rule)}
+.graves b{display:block; font-size:16px}
+.graves .where{font-size:13.5px; color:var(--ink-3)}
+.graves .who{font-size:14.5px; margin-top:4px}
+.dot9{display:inline-block; width:9px; height:9px; border-radius:50%; margin-right:6px; vertical-align:1px}
+
+@media print{
+  .ringctl,.controls,.chips,.search,.results,.tip,#find-results,#print-leads{display:none!important}
+  section.part{break-inside:avoid-page}
+  .fig,.scroll,.lexis-wrap{overflow:visible!important}
+  a{text-decoration:none}
+}
+
+/* moments with a date */
+.stones{list-style:none; margin:14px 0 0; padding:0}
+.stones .cent{font-weight:800; font-size:19px; margin:26px 0 4px; padding-bottom:6px; border-bottom:1px solid var(--rule)}
+.stones .cent:first-child{margin-top:6px}
+.stone{display:grid; grid-template-columns:5.8em minmax(0,1fr); column-gap:16px; padding:9px 0; border-bottom:1px solid var(--rule-2)}
+.stone .yr{font-weight:700; font-variant-numeric:tabular-nums; font-size:14.5px}
+.stone .what{font-size:15.5px; line-height:1.55}
+.stone .meta{font-size:13.5px; line-height:1.5; color:var(--ink-3)}
+.stone.print .what::before{content:"In print · "; color:var(--ink-3)}
+/* names that moved */
+table.drift td, table.drift th{vertical-align:top}
+.ladder{list-style:none; margin:10px 0 0; padding:0}
+.rung{display:grid; grid-template-columns:5em minmax(0,1fr); column-gap:16px; padding:12px 0; border-bottom:1px solid var(--rule-2)}
+.rung:last-child{border-bottom:0}
+.rung .yr{font-variant-numeric:tabular-nums; color:var(--ink-3); padding-top:5px}
+.nameline{font-size:clamp(19px,2.4vw,25px); line-height:1.3; display:flex; flex-wrap:wrap; column-gap:.32em}
+.tok-patro{background:linear-gradient(transparent 62%, color-mix(in srgb, var(--mother) 30%, transparent) 62%)}
+.tok-farm{font-weight:700}
+.rung .note{font-size:14.5px; line-height:1.55; color:var(--ink-2); margin-top:4px}
+.legend-row{display:flex; flex-wrap:wrap; gap:6px 22px; list-style:none; margin:12px 0 0; padding:0; font-size:14.5px; color:var(--ink-2)}
+.legend-row li{display:flex; align-items:baseline; gap:8px}
 </style>
 
 <div class="wrap">
@@ -333,8 +382,8 @@ dl.method dt{font-weight:700; margin-top:14px} dl.method dd{margin:2px 0 0; max-
     <li><b data-v="people"></b><span>people in your family tree in all, counting your parents</span></li>
   </ul>
   <nav aria-label="Sections"><ul class="toc">
-    <li><a href="#start">Where this comes from</a></li><li><a href="#rings">Your whole tree</a></li><li><a href="#generation">Alive in your lifetime</a></li>
-    <li><a href="#where">Where they lived</a></li><li><a href="#records">Records</a></li><li><a href="#print">In print</a></li>
+    <li><a href="#start">Where this comes from</a></li><li><a href="#rings">Your whole tree</a></li><li><a href="#shape">The shape of the tree</a></li><li><a href="#generation">Alive in your lifetime</a></li>
+    <li><a href="#where">Where they lived</a></li><li><a href="#records">Records</a></li><li><a href="#moments">Moments with a date</a></li><li><a href="#names">Names that moved</a></li><li><a href="#written">How much is written down</a></li><li><a href="#sides">The two sides</a></li><li><a href="#print">In print</a></li>
     <li><a href="#life">David Hone</a></li><li><a href="#habits">Family habits</a></li><li><a href="#dna">DNA</a></li>
     <li><a href="#snapshots">Who was alive when</a></li><li><a href="#crossings">Crossings</a></li><li><a href="#gateway">Descended from kings?</a></li>
     <li><a href="#repeat">One person, many times</a></li><li><a href="#lives">How long they lived</a></li><li><a href="#guessed">Guessed dates</a></li>
@@ -403,7 +452,19 @@ dl.method dt{font-weight:700; margin-top:14px} dl.method dd{margin:2px 0 0; max-
   </div>
   <h3>More about the picture</h3>
   <p><b>Why do the outer rings look like thin spokes?</b> The circle can only be divided so finely. Past eleven generations, everyone further back is drawn inside the narrow slice of the ancestor they descend from, so long, well-researched family lines appear as spokes.</p>
+  <p><b>What is the pedigree number in the card?</b> Family historians number a pedigree the same way everywhere: you are 1, your father 2, your mother 3, and from there every father is twice their child’s number and every mother one more than that. The card gives that number for anyone who fills a single place in your tree. People who can be reached by several routes have several numbers, so the card leaves it out for them.</p>
   <div id="rings-notes"></div>
+</section>
+
+<section class="part" id="shape" aria-labelledby="h-shape">
+  <h2 id="h-shape">The shape of the tree, generation by generation</h2>
+  <p class="lede" id="shape-lede"></p>
+  <div id="overlap-wrap"><div class="fig" id="overlap-bar"></div><p class="cap" id="overlap-cap"></p></div>
+  <h3>Where the people in your tree sit</h3>
+  <p>Each bar is one generation back from you: your parents, your grandparents, and so on. Its height is how many people the tree first records at that distance. Because the same person can be reached by many routes, everyone is counted once, at the nearest generation they appear in.</p>
+  <div class="fig scroll" id="composition"></div>
+  <div class="two" style="margin-top:12px"><div class="card" id="composition-detail" aria-live="polite"><p class="hint">Point at a generation, or tap one, to read its counts.</p></div><div id="composition-notes"></div></div>
+  <p class="cap" id="composition-cap"></p>
 </section>
 
 <section class="part" id="generation" aria-labelledby="h-generation">
@@ -454,6 +515,9 @@ dl.method dt{font-weight:700; margin-top:14px} dl.method dd{margin:2px 0 0; max-
   </ul>
   <p class="cap" id="where-cap"></p>
   <div class="two" style="margin-top:14px"><div class="card" id="map-card" aria-live="polite"><p class="hint">Point at a dot, or tap one, to see who it is, the place written exactly as the record has it, and where that record came from.</p></div><div id="map-notes"></div></div>
+  <h3>Graves the records name</h3>
+  <p id="graves-lede"></p>
+  <ul class="graves" id="graves"></ul>
 </section>
 
 <section class="part" id="records" aria-labelledby="h-records">
@@ -463,6 +527,65 @@ dl.method dt{font-weight:700; margin-top:14px} dl.method dd{margin:2px 0 0; max-
   <h3>What the tree also claims, and why it can’t be right</h3>
   <ul class="impossible" id="impossible"></ul>
   <p class="cap" id="records-cap"></p>
+</section>
+
+<section class="part" id="moments" aria-labelledby="h-moments">
+  <h2 id="h-moments">Moments with a date</h2>
+  <p class="lede" id="moments-lede"></p>
+  <div class="controls"><div><span class="ctl-name" aria-hidden="true">Show</span>
+    <fieldset class="seg" id="ctl-moments"><legend>Which moments</legend>
+      <input type="radio" name="moments" id="mom-a" value="a" checked><label for="mom-a">Everything</label>
+      <input type="radio" name="moments" id="mom-r" value="r"><label for="mom-r">From the tree’s own records</label>
+      <input type="radio" name="moments" id="mom-p" value="p"><label for="mom-p">From newspapers and books</label>
+    </fieldset></div></div>
+  <ol class="stones" id="moments-list"></ol>
+  <p class="cap" id="moments-cap"></p>
+  <aside class="limits"><h4>What this can’t tell you</h4><p>This is not a route through anyone’s life. Each line is one moment a record puts somebody somewhere, and the gaps between them are years nobody wrote down. A date in quotation marks is the record’s own wording, such as “about” or “before”.</p></aside>
+</section>
+
+<section class="part" id="names" aria-labelledby="h-names">
+  <h2 id="h-names">Names that moved</h2>
+  <p class="lede" id="names-lede"></p>
+  <h3>Spellings that changed from parent to child</h3>
+  <p>A surname was written down by whoever kept the record: a clerk, a priest, a census taker. These are the places in your tree where a child’s surname is spelled differently from the father’s. Some are real changes a family made, often on arriving in America; others are only two people typing the same name differently into the shared tree.</p>
+  <div class="scroll"><table class="ledger drift" id="drift-table"><thead><tr><th scope="col">The father</th><th scope="col">The child</th><th scope="col" class="n">Child born</th><th scope="col">Side</th></tr></thead><tbody></tbody></table></div>
+  <p class="cap" id="drift-cap"></p>
+  <div id="ladder-block">
+    <h3 id="ladder-h">One line of names, read from the oldest down</h3>
+    <p id="ladder-lede"></p>
+    <ul class="legend-row" id="ladder-key"></ul>
+    <ol class="ladder" id="ladder"></ol>
+    <p class="cap" id="ladder-cap"></p>
+  </div>
+</section>
+
+<section class="part" id="written" aria-labelledby="h-written">
+  <h2 id="h-written">How much is written down</h2>
+  <p class="lede" id="written-lede"></p>
+  <h3>How full each generation is</h3>
+  <p>Every generation back doubles the number of places in a family tree: two parents, four grandparents, eight great-grandparents, and so on. These bars show how many of those places the tree actually fills.</p>
+  <div class="fillstrip" id="fill-strip"></div>
+  <p class="cap" id="fill-cap"></p>
+  <h3>What is known about them</h3>
+  <p>The further back the tree goes, the less each entry holds. This counts, for each stretch of generations, how many of the people recorded there have a birth year, a death year, both parents named, and a date exact to the day.</p>
+  <div class="scroll"><table class="ledger band" id="band-table"><thead><tr><th scope="col">Generations back</th><th scope="col" class="n">People</th><th scope="col" class="n">Birth year</th><th scope="col" class="n">Death year</th><th scope="col" class="n">Both parents</th><th scope="col" class="n">A date to the day</th></tr></thead><tbody></tbody></table></div>
+  <p class="cap" id="band-cap"></p>
+  <h3>Which of your great-grandparents opens the widest door</h3>
+  <p id="doors-lede"></p>
+  <div class="scroll"><table class="ledger doors" id="doors-table"><thead><tr><th scope="col">Your great-grandparent</th><th scope="col">Side</th><th scope="col" class="n">People behind them</th><th scope="col" class="n">Born 1700 or later</th><th scope="col" class="n">Reaches back</th></tr></thead><tbody></tbody></table></div>
+  <p class="cap">“People behind them” counts everyone the tree places above that great-grandparent. “Reaches back” is the furthest generation their lines get to, counted from you.</p>
+  <h3>Where the lines stop</h3>
+  <p id="walls-lede"></p>
+  <ul class="walls" id="walls-list"></ul>
+  <p class="cap" id="walls-cap"></p>
+  <aside class="limits"><h4>What this can’t tell you</h4><p>A wall is where this copy of the tree stops, not where your family stops. Somebody may have researched the next generation without it reaching the shared tree, or the records may sit unread in an archive. An empty place in the pedigree never means nobody was there: everyone has two parents, whether or not they were written down.</p></aside>
+</section>
+
+<section class="part" id="sides" aria-labelledby="h-sides">
+  <h2 id="h-sides">The two sides, side by side</h2>
+  <p class="lede" id="sides-lede"></p>
+  <div class="scroll"><table class="ledger compare" id="compare-table"><thead><tr><th scope="col">Measure</th><th scope="col" class="n">Your father’s side</th><th scope="col" class="n">Your mother’s side</th></tr></thead><tbody></tbody></table></div>
+  <p class="cap" id="compare-cap"></p>
 </section>
 
 <section class="part" id="print" aria-labelledby="h-print">
@@ -629,6 +752,12 @@ dl.method dt{font-weight:700; margin-top:14px} dl.method dd{margin:2px 0 0; max-
   <p class="note">This isn’t life expectancy. In the past, many children died very young, but a child who died young never had children, so they never appear in anyone’s family tree as an ancestor. Everyone drawn here lived at least long enough to become a parent, which is why the typical age at death looks high.</p>
   <h3>The year around</h3>
   <p id="clock-lede"></p>
+  <div class="controls"><div><span class="ctl-name" aria-hidden="true">Show</span>
+    <fieldset class="seg" id="ctl-clock"><legend>Whose dates</legend>
+      <input type="radio" name="clockside" id="clock-a" value="a" checked><label for="clock-a">Everyone</label>
+      <input type="radio" name="clockside" id="clock-f" value="f"><label for="clock-f">Your father’s side</label>
+      <input type="radio" name="clockside" id="clock-m" value="m"><label for="clock-m">Your mother’s side</label>
+    </fieldset></div></div>
   <div class="clock-pair">
     <figure class="wheel"><figcaption>Births</figcaption><div class="fig" id="clock-births"></div></figure>
     <figure class="wheel"><figcaption>Deaths</figcaption><div class="fig" id="clock-deaths"></div></figure>
@@ -650,6 +779,11 @@ dl.method dt{font-weight:700; margin-top:14px} dl.method dd{margin:2px 0 0; max-
   <p class="lede">When a birth year is copied from a real record, such as a church’s register of baptisms, its last digit could be anything from 0 to 9, and each digit turns up about equally often. When somebody estimates a year, they tend to choose a round number ending in 0 or 5. So counting last digits shows how much of each period of your tree comes from records, and how much was filled in by guesswork.</p>
   <div class="fig" id="digits"></div>
   <p class="cap" id="digits-cap"></p>
+  <h3>How the share of round years changes over time</h3>
+  <p>Each point is one fifty-year stretch of birth years on one side of your family. The line through it shows the range the number of people allows: with few people, the share is less certain. The dashed line marks 20%, the share you would expect if every year came from a record.</p>
+  <div class="fig" id="rounds"></div>
+  <div class="two" style="margin-top:12px"><div class="card" id="rounds-detail" aria-live="polite"><p class="hint">Point at a point, or tap one, to read it.</p></div><div id="rounds-notes"></div></div>
+  <p class="cap" id="rounds-cap"></p>
 </section>
 
 <section class="part" id="doubts" aria-labelledby="h-doubts">
@@ -995,6 +1129,14 @@ setV('shared', fmt(D.totals.shared)); setV('people', fmt(D.totals.people));
   function showCard(i){
     if (i < 0){ card.replaceChildren(el('p', { class: 'hint' }, 'Point at a block, or tap one, to see who it is. A line is drawn from that person down to you.')); return; }
     const rows = [['Side', cap(SIDE_WORDS[T.side[i]])]];
+    if (T.lines[i] === 1){                                   // the standard pedigree numbering only means anything for a single place
+      const root = T.lF[i] > 0 ? iF : iM, chain = chainFrom(root, i);
+      if (chain){
+        let no = T.lF[i] > 0 ? 2 : 3;
+        for (let k = 1; k < chain.length; k++) no = T.fa[chain[k - 1]] === chain[k] ? 2 * no : 2 * no + 1;
+        rows.push(['Pedigree number', `${fmt(no)} — you are 1, your father 2, your mother 3, and so on`]);
+      }
+    }
     const steps = [];
     if (T.lF[i] > 0) steps.push(`${T.dF[i]} on your father’s side`);
     if (T.lM[i] > 0) steps.push(`${T.dM[i]} on your mother’s side`);
@@ -1295,10 +1437,13 @@ setV('shared', fmt(D.totals.shared)); setV('people', fmt(D.totals.people));
       g.on('mouseenter focus click', () => show(c));
     });
   }
+  let clockSide = 'a';
+  const sideOK = c => clockSide === 'a' || c.side === 'both' || (clockSide === 'f' ? c.side === 'father' : c.side === 'mother');
   function drawClock(){
-    wheel($('#clock-births'), events.filter(c => c.ev === 'Birth'), 'Births');
-    wheel($('#clock-deaths'), events.filter(c => c.ev === 'Death'), 'Deaths');
+    wheel($('#clock-births'), events.filter(c => c.ev === 'Birth' && sideOK(c)), 'Births');
+    wheel($('#clock-deaths'), events.filter(c => c.ev === 'Death' && sideOK(c)), 'Deaths');
   }
+  document.querySelectorAll('input[name=clockside]').forEach(r => r.addEventListener('change', () => { clockSide = r.value; drawClock(); }));
   register(drawClock);
 
   const births = events.filter(c => c.ev === 'Birth'), deaths = events.filter(c => c.ev === 'Death');
@@ -2146,6 +2291,554 @@ setV('shared', fmt(D.totals.shared)); setV('people', fmt(D.totals.people));
   const pr = people(Q.probate), ce = people(Q.census);
   if (pr.length && $('#doubt-probate')) $('#doubt-probate').append(`${cap(words(Q.probate.length))} of the WikiTree biographies found for this page already cite them, for `, ...joinNodes(pr.map(who)), '.');
   if (ce.length && $('#doubt-census')) $('#doubt-census').append(`${cap(words(Q.census.length))} biographies cite them, for `, ...joinNodes(ce.map(who)), '.');
+})();
+
+/* ---- 39-written.js ---- */
+/* How much is written down: how full each generation is, what is known about the people, which great-grandparent
+   opens the widest door, and where the lines stop. Everything here is counted from T, so it works for any subject. */
+(function written(){
+  const strip = $('#fill-strip');
+  if (!strip) return;
+  const pick = i => document.dispatchEvent(new CustomEvent('ptoy:select', { detail: i }));
+  const who = i => { const b = el('button', { type: 'button', class: 'who' }, T.n[i]); b.addEventListener('click', () => pick(i)); return b; };
+  const relWord = i => {
+    const d = T.dy[i], role = T.s[i] === 'M' ? 'father' : T.s[i] === 'F' ? 'mother' : 'parent';
+    return d === 1 ? `your ${role}` : `your ${'great-'.repeat(Math.max(0, d - 2))}grand${role}`;
+  };
+  const parents = i => [T.fa[i], T.mo[i]].filter(x => x >= 0);
+  const byGen = [];
+  for (let g = 1; g <= 12; g++) byGen.push({ g, slots: 2 ** g, n: 0 });
+  let deepest = 0, exact = 0;
+  for (let i = 0; i < N; i++){
+    const g = T.dy[i];
+    if (g >= 1 && g <= 12) byGen[g - 1].n++;
+    if (g > deepest) deepest = g;
+    if (T.gr[i] === 0 || T.gr[i] === 1) exact++;
+  }
+
+  /* ---- how full each generation is ---- */
+  byGen.forEach(r => {
+    const share = 100 * r.n / r.slots;
+    strip.append(el('div', {},
+      el('span', {}, `${r.g} back`),
+      el('div', { class: 'bar' }, el('i', { style: `width:${Math.max(1, Math.min(100, share))}%` })),
+      el('span', {}, `${share >= 10 ? Math.round(share) : share.toFixed(1)}% · ${fmt(r.n)} of ${fmt(r.slots)}`)));
+  });
+  const full = byGen.filter(r => r.n === r.slots).length;
+  const thin = byGen.find(r => r.n * 2 < r.slots);
+  const last = byGen[byGen.length - 1];
+  $('#fill-cap').textContent = `Every place is filled for ${words(full)} ${full === 1 ? 'generation' : 'generations'} back${thin ? `, and by ${thin.g} generations back fewer than half of the ${fmt(thin.slots)} places have a name in them` : ''}. Further back the tree is a few long lines rather than a full pedigree: twelve generations back it holds ${fmt(last.n)} of ${fmt(last.slots)} places, and the deepest line recorded reaches ${deepest} generations.`;
+  $('#written-lede').textContent = `A family tree is never evenly filled. This section counts what is actually there: how many of the places in each generation have somebody in them, how much is recorded about those people, which of your great-grandparents leads to the most ancestors, and where each line runs out.`;
+
+  /* ---- what is known, by stretch of generations ---- */
+  const tb = $('#band-table tbody');
+  [[1, 7], [8, 14], [15, 21], [22, 99]].forEach(([lo, hi]) => {
+    const ids = [];
+    for (let i = 0; i < N; i++) if (T.dy[i] >= lo && T.dy[i] <= hi) ids.push(i);
+    if (!ids.length) return;
+    const share = f => `${Math.round(100 * ids.filter(f).length / ids.length)}%`;
+    tb.append(el('tr', {},
+      el('th', { scope: 'row' }, hi > 90 ? `${lo} and further back` : `${lo}–${hi}`),
+      el('td', { class: 'n' }, fmt(ids.length)),
+      el('td', { class: 'n' }, share(i => T.b[i])),
+      el('td', { class: 'n' }, share(i => T.d[i])),
+      el('td', { class: 'n' }, share(i => T.fa[i] >= 0 && T.mo[i] >= 0)),
+      el('td', { class: 'n' }, share(i => T.gr[i] === 0 || T.gr[i] === 1))));
+  });
+  $('#band-cap').textContent = `“A date to the day” means a birth or death date exact to the day, which is only known where somebody’s page on FamilySearch or WikiTree was read for this page: ${fmt(exact)} people in all. Each percentage is of the people the tree records in that stretch, not of the places a full pedigree would hold.`;
+
+  /* ---- the widest door ---- */
+  const behind = i => {
+    const seen = new Set(), stack = parents(i).slice();
+    while (stack.length){
+      const v = stack.pop();
+      if (seen.has(v)) continue;
+      seen.add(v);
+      parents(v).forEach(p => stack.push(p));
+    }
+    return seen;
+  };
+  const doors = [];
+  for (let i = 0; i < N; i++){
+    if (T.dy[i] !== 3) continue;
+    const up = [...behind(i)];
+    doors.push({ i, opens: up.length, since1700: up.filter(x => T.b[x] && T.b[x] >= 1700).length, deep: up.reduce((m, x) => Math.max(m, T.dy[x]), 3) });
+  }
+  doors.sort((a2, b2) => b2.opens - a2.opens);
+  const dmax = Math.max(1, doors.length ? doors[0].opens : 1), dtb = $('#doors-table tbody');
+  doors.forEach(d => {
+    dtb.append(el('tr', {},
+      el('th', { scope: 'row' }, who(d.i), el('div', { class: 'cap', style: 'margin:0' }, yearsOf(d.i))),
+      el('td', {}, cap(SIDE_WORDS[T.side[d.i]])),
+      el('td', { class: 'n' }, el('span', { class: 'rowbar' }, el('i', { style: `width:${Math.max(2, Math.round(120 * d.opens / dmax))}px;background:var(${SIDE_VAR[T.side[d.i]] || '--ink'})` }), fmt(d.opens))),
+      el('td', { class: 'n' }, fmt(d.since1700)),
+      el('td', { class: 'n' }, d.opens ? `${d.deep} back` : '—')));
+  });
+  if (doors.length){
+    const open = doors.filter(d => d.opens > 0), shut = doors.filter(d => d.opens === 0);
+    $('#doors-lede').textContent = `${doors.length === 8 ? 'All eight of your great-grandparents are recorded' : `The tree records ${words(doors.length)} of your eight great-grandparents`}, and almost everything above them arrives through just one or two: ${T.n[doors[0].i]} leads to ${fmt(doors[0].opens)} people, ${pct(doors[0].opens, D.totals.people)}% of your whole tree${open.length > 1 ? `, and ${T.n[doors[1].i]} to ${fmt(doors[1].opens)}` : ''}.${shut.length ? ` ${cap(listJoin(shut.map(d => T.n[d.i])))} ${shut.length === 1 ? 'has' : 'have'} nobody recorded above them at all.` : ''}`;
+  }
+
+  /* ---- where the lines stop ---- */
+  const walls = [], onlyFather = [], onlyMother = [];
+  for (let i = 0; i < N; i++){
+    if (living(i)) continue;
+    const f = T.fa[i] >= 0, m = T.mo[i] >= 0;
+    if (!f && !m) walls.push(i);
+    else if (f && !m) onlyFather.push(i);
+    else if (!f && m) onlyMother.push(i);
+  }
+  walls.sort((a2, b2) => T.dy[a2] - T.dy[b2] || (T.b[a2] || 9999) - (T.b[b2] || 9999));
+  const near = walls.filter(i => T.dy[i] <= 8), shown = near.slice(0, 24);
+  $('#walls-lede').textContent = `A wall is somebody with no parent recorded: the place where one of your lines stops. Your tree has ${fmt(walls.length)} of them, and ${fmt(near.length)} sit within eight generations of you, where records are most likely to exist. ${shown.length === near.length ? 'They are all below' : `The closest ${words(shown.length)} are below`}, nearest first.`;
+  const ul = $('#walls-list');
+  shown.forEach(i => ul.append(el('li', {}, who(i),
+    el('span', { class: 'm' }, `${cap(relWord(i))}${T.b[i] ? `, born ${T.b[i]}` : ', with no years recorded'} · ${SIDE_WORDS[T.side[i]]}`))));
+  $('#walls-cap').textContent = `${fmt(onlyFather.length + onlyMother.length)} more people have one parent recorded and not the other. In ${fmt(onlyFather.length)} of those the mother is the one missing, and in ${fmt(onlyMother.length)} the father is: old records name fathers more often, so that gap is the usual pattern rather than a surprise.`;
+})();
+
+/* ---- 40-shape.js ---- */
+/* The shape of the tree: how many people stand at each generation, which side they are on, and how many stand on both. */
+(function shape(){
+  const host = $('#composition');
+  if (!host) return;
+  const rows = [];
+  let deepest = 0;
+  for (let i = 0; i < N; i++) if (T.dy[i] > deepest) deepest = T.dy[i];
+  for (let g = 1; g <= deepest; g++) rows.push({ g, f: 0, b: 0, m: 0, total: 0, shared: 0 });
+  for (let i = 0; i < N; i++){
+    const r = rows[T.dy[i] - 1];
+    if (!r) continue;
+    const s = T.side[i] === 'f' ? 'f' : T.side[i] === 'm' ? 'm' : 'b';
+    r[s]++; r.total++;
+    if (T.side[i] === 'b') r.shared++;                          // 'p' is a parent's own marker, not an ancestor on both sides
+  }
+  const shared = D.totals.shared || 0;
+  const peak = rows.reduce((a, r) => r.total > a.total ? r : a, rows[0]);
+  const firstShared = rows.find(r => r.shared > 0);
+  $('#shape-lede').textContent = `Your tree holds ${fmt(D.totals.people)} people in all. They aren’t spread evenly: the generations closest to you are small and complete, the middle ones are the widest, and the oldest are a handful of long lines. The most crowded generation is ${peak.g} back from you, with ${fmt(peak.total)} people.${shared ? ` ${fmt(shared)} of them stand on both sides of your family at once, the nearest of them ${firstShared ? `${firstShared.g} generations back` : 'far back in the Middle Ages'}.` : ' Nobody in this tree stands on both sides: your parents’ families never meet.'}`;
+
+  /* ---- the one-line split, only when somebody stands on both sides ---- */
+  const wrap = $('#overlap-wrap');
+  if (!shared){
+    if (wrap) wrap.hidden = true;
+  } else {
+    const segs = [['Only on your father’s side', D.totals.father - shared, '--father'], ['On both sides', shared, '--both'], ['Only on your mother’s side', D.totals.mother - shared, '--mother']];
+    const drawOverlap = () => {
+      const h = $('#overlap-bar');
+      if (!needD3(h)) return;
+      h.replaceChildren();
+      const W = Math.max(320, h.clientWidth || 700), H = 74;
+      const x = d3.scaleLinear().domain([0, D.totals.union]).range([0, W]);
+      const svg = d3.select(h).append('svg').attr('viewBox', `0 0 ${W} ${H}`).attr('width', W).attr('height', H)
+        .attr('role', 'img').attr('aria-label', segs.map(s => `${s[0]}: ${fmt(s[1])}`).join('; '));
+      let acc = 0;
+      segs.forEach(([label, v, colour], k) => {
+        const x0 = x(acc), w = Math.max(2, x(v) - 2);
+        svg.append('rect').attr('x', x0).attr('y', 40).attr('width', w).attr('height', 24).attr('rx', k === 1 ? 0 : 3).attr('fill', css(colour));
+        const anchor = k === 0 ? 'start' : k === 2 ? 'end' : 'middle', tx = k === 0 ? x0 : k === 2 ? x0 + w : x0 + w / 2;
+        svg.append('text').attr('x', tx).attr('y', 16).attr('text-anchor', anchor).attr('font-weight', 700).style('font-size', '14px').attr('fill', css('--ink')).text(fmt(v));
+        svg.append('text').attr('x', tx).attr('y', 32).attr('text-anchor', anchor).style('font-size', '12.5px').attr('fill', css('--ink-3')).text(label);
+        acc += v;
+      });
+    };
+    register(drawOverlap);
+    $('#overlap-cap').textContent = `Counted separately, your father’s side holds ${fmt(D.totals.father)} people and your mother’s ${fmt(D.totals.mother)}. Together that would be ${fmt(D.totals.father + D.totals.mother)}, but your tree holds ${fmt(D.totals.union)}, because ${fmt(shared)} people stand behind both of your parents.`;
+  }
+
+  /* ---- people at each generation ---- */
+  const detail = $('#composition-detail');
+  function draw(){
+    if (!needD3(host)) return;
+    host.replaceChildren();
+    const W = Math.max(760, host.clientWidth || 760), H = 300, m = { t: 16, r: 10, b: 44, l: 52 };
+    const x = d3.scaleBand().domain(rows.map(r => r.g)).range([m.l, W - m.r]).paddingInner(.18);
+    const y = d3.scaleLinear().domain([0, d3.max(rows, r => r.total) * 1.06]).range([H - m.b, m.t]);
+    const svg = d3.select(host).append('svg').attr('viewBox', `0 0 ${W} ${H}`).attr('width', W).attr('height', H).style('min-width', '760px')
+      .attr('role', 'img').attr('aria-label', 'How many people the tree records at each generation back from you, split by side of the family');
+    y.ticks(4).forEach(v => {
+      svg.append('line').attr('x1', m.l).attr('x2', W - m.r).attr('y1', y(v)).attr('y2', y(v)).attr('stroke', css('--rule-2'));
+      svg.append('text').attr('class', 'tick').attr('x', m.l - 8).attr('y', y(v)).attr('dy', '.32em').attr('text-anchor', 'end').text(fmt(v));
+    });
+    rows.filter(r => r.g === 1 || r.g % 5 === 0 || r.g === rows.length).forEach(r =>
+      svg.append('text').attr('class', 'tick').attr('x', x(r.g) + x.bandwidth() / 2).attr('y', H - m.b + 18).attr('text-anchor', 'middle').text(r.g));
+    svg.append('text').attr('class', 'tick').attr('x', m.l).attr('y', H - 8).text('generations back from you');
+    const show = r => cardLines(detail, `${r.g} ${r.g === 1 ? 'generation' : 'generations'} back`, `${fmt(r.total)} ${r.total === 1 ? 'person' : 'people'} first appear here`,
+      [['Only your father’s side', fmt(r.f)], ['On both sides', fmt(r.b)], ['Only your mother’s side', fmt(r.m)],
+       ['Places a full pedigree would have', r.g <= 30 ? fmt(2 ** r.g) : 'more than a billion']]);
+    rows.forEach(r => {
+      const g = svg.append('g').attr('tabindex', 0).attr('role', 'button').style('cursor', 'pointer')
+        .attr('aria-label', `${r.g} generations back: ${r.total} people, ${r.f} on your father’s side, ${r.b} on both, ${r.m} on your mother’s`);
+      let base = H - m.b;
+      [['f', '--father'], ['b', '--both'], ['m', '--mother']].forEach(([k, colour]) => {
+        if (!r[k]) return;
+        const h = (H - m.b) - y(r[k]);
+        g.append('rect').attr('x', x(r.g)).attr('y', base - h).attr('width', x.bandwidth()).attr('height', Math.max(1, h)).attr('fill', css(colour));
+        base -= h;
+      });
+      g.append('rect').attr('x', x(r.g)).attr('y', m.t).attr('width', x.bandwidth()).attr('height', H - m.t - m.b).attr('fill', 'transparent');
+      g.on('pointerenter focus click', () => show(r));
+    });
+  }
+  register(draw);
+  let complete = 0;
+  for (const r of rows){ if (r.total !== 2 ** r.g) break; complete++; }
+  $('#composition-cap').textContent = `Everybody is counted once, at the nearest generation where they appear, so the bars add up to the ${fmt(D.totals.people)} people in the tree. ${complete ? `The first ${words(complete)} ${complete === 1 ? 'generation is' : 'generations are'} complete;` : 'Not even the first generation is complete;'} after that the bars fall short of the places a pedigree would have, and past the widest generation they shrink again, because the lines themselves run out.`;
+})();
+
+/* ---- 41-sides.js ---- */
+/* The two sides in numbers, counted the same way for both. */
+(function sides(){
+  const tb = $('#compare-table tbody');
+  if (!tb) return;
+  const onF = i => T.lF[i] > 0, onM = i => T.lM[i] > 0;
+  const count = (test, side) => { let n = 0; for (let i = 0; i < N; i++) if (side(i) && !living(i) && test(i)) n++; return n; };
+  const deepest = side => { let g = 0; for (let i = 0; i < N; i++) if (side(i) && T.dy[i] > g) g = T.dy[i]; return g; };
+  const wall = i => T.fa[i] < 0 && T.mo[i] < 0;
+  const gw = side => (D.gateway && D.gateway.sides || []).find(s => s.side === side) || null;
+  const titled = side => { const s = gw(side); return s ? s.titledTotal : 0; };
+  const firstTitle = side => { const s = gw(side); return s && s.firstTitled ? `${s.firstTitled.depth} back` : 'none'; };
+  const events = side => (D.places ? D.places.events.filter(e => (side === 'f' ? onF(e[0]) : onM(e[0]))).length : 0);
+  const mostLines = side => {
+    let best = -1;
+    for (let i = 0; i < N; i++){
+      const lines = side === 'f' ? T.lF[i] : T.lM[i];
+      if (lines > 0 && (best < 0 || lines > (side === 'f' ? T.lF[best] : T.lM[best]))) best = i;
+    }
+    return best < 0 ? '—' : `${fmt(side === 'f' ? T.lF[best] : T.lM[best])} (${shortName(best, 22)})`;
+  };
+  const rows = [
+    ['Ancestors recorded', fmt(D.totals.father), fmt(D.totals.mother)],
+    ['With a birth year', fmt(count(i => T.b[i], onF)), fmt(count(i => T.b[i], onM))],
+    ['Born in 1700 or later', fmt(count(i => T.b[i] && T.b[i] >= 1700, onF)), fmt(count(i => T.b[i] && T.b[i] >= 1700, onM))],
+    ['Generations the tree reaches back', `${deepest(onF)}`, `${deepest(onM)}`],
+    ['A date exact to the day', fmt(count(i => T.gr[i] === 0 || T.gr[i] === 1, onF)), fmt(count(i => T.gr[i] === 0 || T.gr[i] === 1, onM))],
+    ['A place recorded', fmt(events('f')), fmt(events('m'))],
+    ['A title or noble word in the name', fmt(titled('f')), fmt(titled('m'))],
+    ['First title, generations back', firstTitle('f'), firstTitle('m')],
+    ['Lines that stop, within eight generations', fmt(count(i => wall(i) && T.dy[i] <= 8, onF)), fmt(count(i => wall(i) && T.dy[i] <= 8, onM))],
+    ['Lines that stop, in all', fmt(count(wall, onF)), fmt(count(wall, onM))],
+    ['Most places one ancestor fills', mostLines('f'), mostLines('m')],
+  ];
+  rows.forEach(r => tb.append(el('tr', {}, el('th', { scope: 'row' }, r[0]), el('td', { class: 'n' }, r[1]), el('td', { class: 'n' }, r[2]))));
+  const big = D.totals.mother >= D.totals.father ? 'mother' : 'father';
+  const small = big === 'mother' ? 'father' : 'mother';
+  const ratio = Math.max(D.totals.father, D.totals.mother) / Math.max(1, Math.min(D.totals.father, D.totals.mother));
+  $('#sides-lede').textContent = `The two halves of your tree were built by different people, from different records, so they are not the same size or the same depth. Your ${big}’s side holds ${fmt(Math.max(D.totals.father, D.totals.mother))} recorded ancestors and your ${small}’s ${fmt(Math.min(D.totals.father, D.totals.mother))}: ${ratio >= 10 ? `about ${Math.round(ratio)} times as many` : ratio >= 1.5 ? `about ${ratio.toFixed(1)} times as many` : 'much the same'}. That is a difference in the research, not in the families.`;
+  $('#compare-cap').textContent = `Every figure is counted from the same copy of the tree as the rest of this page. Anybody who stands on both sides is counted on both, so the two columns can add up to more than the size of your tree. Living people are left out.`;
+})();
+
+/* ---- 42-graves.js ---- */
+/* Graves the records name: burials grouped by the place the record gives. */
+(function graves(){
+  const ul = $('#graves');
+  if (!ul || !D.places) return;
+  const pick = i => document.dispatchEvent(new CustomEvent('ptoy:select', { detail: i }));
+  const NAMED = /cemetery|cemetary|kirkeg|churchyard|graveyard|burial/i;
+  const key = place => {                                   // the same ground, however the record spells the rest of the address
+    const parts = place.split(',').map(s => s.trim()).filter(Boolean);
+    const ground = parts.find(p => NAMED.test(p));
+    const town = parts.find(p => !NAMED.test(p)) || '';
+    return (ground ? `${ground}|${town}` : parts.slice(0, 2).join('|')).toLowerCase();
+  };
+  const byPlace = new Map();
+  D.places.events.filter(e => e[1] === 'u').forEach(e => {
+    const k = key(e[7]);
+    if (!byPlace.has(k)) byPlace.set(k, { place: e[7], people: [] });
+    byPlace.get(k).people.push({ i: e[0], year: e[2], date: e[6] });
+  });
+  if (!byPlace.size){
+    ul.remove();
+    const lede = $('#graves-lede');
+    if (lede) lede.remove();
+    const h = [...document.querySelectorAll('#where h3')].find(x => x.textContent === 'Graves the records name');
+    if (h) h.remove();
+    return;
+  }
+  const groups = [...byPlace.values()].sort((a, b) => b.people.length - a.people.length || a.place.localeCompare(b.place));
+  groups.forEach(({ place, people }) => {
+    const parts = place.split(',').map(s => s.trim());
+    const named = /cemetery|kirkeg|churchyard|burial|graveyard/i.test(parts[0]);
+    const li = el('li', {}, el('b', {}, named ? parts[0] : parts.slice(0, 2).join(', ')),
+      el('div', { class: 'where' }, named ? parts.slice(1).join(', ') : parts.slice(2).join(', ') || 'as the record gives it'));
+    people.sort((a, b) => (a.year || 0) - (b.year || 0)).forEach(p => {
+      const line = el('div', { class: 'who' }, el('i', { class: 'dot9', style: `background:var(${SIDE_VAR[T.side[p.i]] || '--ink'})`, 'aria-hidden': 'true' }));
+      const b = el('button', { type: 'button', class: 'who' }, T.n[p.i]);
+      b.addEventListener('click', () => pick(p.i));
+      line.append(b, ` · ${p.date || p.year || 'no date given'}`);
+      li.append(line);
+    });
+    ul.append(li);
+  });
+  const total = groups.reduce((a, g) => a + g.people.length, 0);
+  const many = groups.filter(g => g.people.length > 1);
+  $('#graves-lede').textContent = `${cap(words(total))} ${total === 1 ? 'burial is' : 'burials are'} recorded with a place, in ${words(groups.length)} ${groups.length === 1 ? 'place' : 'places'}.${many.length ? ` ${cap(listJoin(many.slice(0, 3).map(g => `${g.place.split(',')[0]} holds ${words(g.people.length)}`)))}.` : ''} A burial place is often the best clue to where a family actually lived, and the headstone may carry dates the tree doesn’t have.`;
+})();
+
+/* ---- 43-rounds.js ---- */
+/* Round birth years over time: the share ending in 0 or 5 for each fifty-year stretch, with the range the numbers allow. */
+(function rounds(){
+  const host = $('#rounds');
+  if (!host) return;
+  const wilson = (k, n) => {                                   // a 95% interval, so small samples aren't read as findings
+    const z = 1.96, p = k / n, d = 1 + z * z / n;
+    const centre = p + z * z / (2 * n), spread = z * Math.sqrt(p * (1 - p) / n + z * z / (4 * n * n));
+    return [100 * (centre - spread) / d, 100 * (centre + spread) / d];
+  };
+  const SIDES = [['f', 'Your father’s side', i => T.lF[i] > 0], ['m', 'Your mother’s side', i => T.lM[i] > 0]];
+  const STEP = 50, FROM = 1400, TO = 1900, MIN = 15;
+  const series = SIDES.map(([key, label, on]) => {
+    const points = [];
+    for (let p = FROM; p < TO; p += STEP){
+      let n = 0, round = 0;
+      for (let i = 0; i < N; i++){
+        const b = T.b[i];
+        if (!b || b < p || b >= p + STEP || !on(i) || living(i)) continue;
+        n++;
+        if (b % 5 === 0) round++;
+      }
+      if (n >= MIN){
+        const [lo, hi] = wilson(round, n);
+        points.push({ p, n, round, share: 100 * round / n, lo, hi });
+      }
+    }
+    return { key, label, points };
+  }).filter(s => s.points.length);
+
+  if (!series.length){
+    host.closest('section').querySelectorAll('#rounds, #rounds-detail, #rounds-cap, #rounds-notes').forEach(e => e.remove());
+    return;
+  }
+  const detail = $('#rounds-detail');
+  function draw(){
+    if (!needD3(host)) return;
+    host.replaceChildren();
+    const W = Math.max(320, host.clientWidth || 700), narrow = W < 700;
+    const panelW = narrow || series.length === 1 ? W : (W - 28) / 2, H = 250, m = { t: 30, r: 14, b: 34, l: 46 };
+    const rowsOf = narrow ? series.length : 1;
+    const H0 = rowsOf * H + (rowsOf - 1) * 16;
+    const svg = d3.select(host).append('svg').attr('viewBox', `0 0 ${W} ${H0}`).attr('width', W).attr('height', H0)
+      .attr('role', 'img').attr('aria-label', 'Share of birth years ending in 0 or 5, by fifty-year stretch, for each side of the family');
+    series.forEach((s, k) => {
+      const ox = narrow ? 0 : k * (panelW + 28), oy = narrow ? k * (H + 16) : 0;
+      const g0 = svg.append('g').attr('transform', `translate(${ox},${oy})`);
+      const x = d3.scaleLinear().domain([FROM - 25, TO]).range([m.l, panelW - m.r]);
+      const y = d3.scaleLinear().domain([0, 100]).range([H - m.b, m.t]);
+      g0.append('text').attr('x', m.l).attr('y', 16).attr('font-weight', 700).style('font-size', '13px').attr('fill', css('--ink')).text(s.label);
+      [0, 20, 50, 100].forEach(v => {
+        g0.append('line').attr('x1', m.l).attr('x2', panelW - m.r).attr('y1', y(v)).attr('y2', y(v))
+          .attr('stroke', css(v === 20 ? '--ink-3' : '--rule-2')).attr('stroke-dasharray', v === 20 ? '4 3' : null);
+        g0.append('text').attr('class', 'tick').attr('x', m.l - 6).attr('y', y(v)).attr('dy', '.32em').attr('text-anchor', 'end').text(`${v}%`);
+      });
+      g0.append('text').attr('class', 'tick').attr('x', panelW - m.r).attr('y', y(20) - 6).attr('text-anchor', 'end').text('what records give: 20%');
+      [1400, 1500, 1600, 1700, 1800, 1900].forEach(v => g0.append('text').attr('class', 'tick').attr('x', x(v)).attr('y', H - m.b + 18).attr('text-anchor', 'middle').text(v));
+      const colour = css(s.key === 'f' ? '--father' : '--mother');
+      g0.append('path').attr('fill', 'none').attr('stroke', colour).attr('stroke-width', 1.5).attr('opacity', .5)
+        .attr('d', d3.line().x(p => x(p.p + 25)).y(p => y(p.share))(s.points));
+      s.points.forEach(p => {
+        const cx = x(p.p + 25), g = g0.append('g').attr('tabindex', 0).attr('role', 'button').style('cursor', 'pointer')
+          .attr('aria-label', `${s.label}, born ${p.p} to ${p.p + 49}: ${Math.round(p.share)} per cent of ${p.n} birth years end in 0 or 5`);
+        g.append('line').attr('x1', cx).attr('x2', cx).attr('y1', y(p.lo)).attr('y2', y(p.hi)).attr('stroke', colour).attr('stroke-width', 1.5);
+        g.append('circle').attr('cx', cx).attr('cy', y(p.share)).attr('r', 4.5).attr('fill', colour).attr('stroke', css('--paper')).attr('stroke-width', 2);
+        g.append('rect').attr('x', cx - 10).attr('y', m.t).attr('width', 20).attr('height', H - m.t - m.b).attr('fill', 'transparent');
+        g.on('pointerenter focus click', () => cardLines(detail, `${s.label}, born ${p.p}–${p.p + 49}`, `${Math.round(p.share)}% of ${fmt(p.n)} birth years end in 0 or 5`,
+          [['Round years', `${fmt(p.round)} of ${fmt(p.n)}`], ['Likely range', `${Math.round(p.lo)}% to ${Math.round(p.hi)}%`],
+           ['What records alone would give', 'about 20%'], ['Reading', p.lo > 25 ? 'more round years than records explain, so many are estimates' : p.hi < 25 ? 'close to what real records give' : 'too few people to tell either way']]));
+      });
+    });
+  }
+  register(draw);
+  const worst = series.flatMap(s => s.points.map(p => ({ ...p, label: s.label }))).sort((a, b) => b.share - a.share)[0];
+  const best = series.flatMap(s => s.points.map(p => ({ ...p, label: s.label }))).sort((a, b) => a.share - b.share)[0];
+  $('#rounds-cap').textContent = `Only stretches with at least ${MIN} birth years are drawn, because a handful of people can show any share at all. The highest is ${s_lab(worst)}, at ${Math.round(worst.share)}% of ${fmt(worst.n)} years; the lowest is ${s_lab(best)}, at ${Math.round(best.share)}%. A share near 20% means the years read like records; the further above it, the more of them somebody worked out rather than read.`;
+  function s_lab(p){ return `${p.label.toLowerCase()}, ${p.p}–${p.p + 49}`; }
+})();
+
+/* ---- 44-moments.js ---- */
+/* Moments with a date: every dated moment the records give, oldest first, with the newspaper and book finds in place. */
+(function moments(){
+  const list = $('#moments-list');
+  if (!list || !D.places) return;
+  const pick = i => document.dispatchEvent(new CustomEvent('ptoy:select', { detail: i }));
+  const KIND = { b: 'born', d: 'died', u: 'buried', r: 'living' };
+  const SRC = D.places.sources || [];
+  const all = [];
+  D.places.events.forEach(e => {
+    const [i, kind, year, , src, , dateText, place] = e;
+    if (!dateText || living(i)) return;
+    all.push({ kind: 'record', i, year, when: dateText, what: KIND[kind] || 'recorded', place, source: SRC[src] || 'a record' });
+  });
+  const WORD = { newspaper: 'is named in a newspaper', book: 'is named in a book' };
+  const seen = new Set();
+  (D.print ? D.print.items : []).forEach(x => {
+    const y = Number(String(x.date).match(/\d{4}/) ? String(x.date).match(/\d{4}/)[0] : 0);
+    if (!y || !x.people.length || x.kind === 'biography' || x.kind === 'place' || x.kind === 'history') return;   // biographies, place notes and history notes carry no date of their own
+    const key = `${x.people[0]}|${y}|${x.title}`;
+    if (seen.has(key)) return;                                                           // one line per item, not one per quote
+    seen.add(key);
+    const named = x.title && T.n[x.people[0]] && !x.title.startsWith(T.n[x.people[0]]);
+    all.push({ kind: 'print', i: x.people[0], year: y, when: x.date, what: named ? x.title : WORD[x.kind] || 'is named in print',
+               source: x.source, url: x.url, confidence: x.confidence });
+  });
+  if (!all.length){
+    const sec = list.closest('section');
+    if (sec) sec.remove();
+    return;
+  }
+  all.sort((a, b) => a.year - b.year || (a.kind === 'record' ? -1 : 1));
+  let filter = 'a', expanded = false;
+  const named = m => /^[A-Z]/.test(m.what || '');
+
+  function draw(){
+    list.replaceChildren();
+    let century = null;
+    const matching = all.filter(m => filter === 'a' || (filter === 'r' ? m.kind === 'record' : m.kind === 'print'));
+    const shown = expanded ? matching : matching.slice(0, 40);
+    shown.forEach(m => {
+      const c = Math.floor(m.year / 100) * 100;
+      if (c !== century){
+        century = c;
+        list.append(el('li', { class: 'cent' }, `${c}s`));
+      }
+      const li = el('li', { class: `stone${m.kind === 'print' ? ' print' : ''}` });
+      const what = el('div', { class: 'what' });
+      const name = el('button', { type: 'button', class: 'who' }, T.n[m.i]);
+      name.addEventListener('click', () => pick(m.i));
+      if (m.kind === 'record'){
+        what.append(name, ` ${m.what}${m.place ? ` in ${m.place}` : ''}.`);
+        li.append(el('div', { class: 'yr' }, m.when), what);
+        li.append(el('div', {}), el('div', { class: 'meta' }, `From ${m.source}`));
+      } else {
+        what.append(name, ' ', m.what, named(m) ? '' : '.');
+        li.append(el('div', { class: 'yr' }, m.when), what);
+        const meta = el('div', { class: 'meta' }, m.confidence === 'likely' ? 'Probably this person · ' : '',
+          m.url ? el('a', { href: m.url, target: '_blank', rel: 'noopener' }, m.source) : m.source);
+        li.append(el('div', {}), meta);
+      }
+      list.append(li);
+    });
+    if (shown.length < matching.length){
+      const more = el('li', { class: 'stone' }, el('div', {}), el('div', {}, el('button', { type: 'button', class: 'btn' }, `Show all ${fmt(matching.length)}`)));
+      more.querySelector('button').addEventListener('click', () => { expanded = true; draw(); });
+      list.append(more);
+    }
+    $('#moments-cap').textContent = `${fmt(shown.length)} of ${fmt(matching.length)} moments shown, oldest first. In all they run from ${all[0].year} to ${all[all.length - 1].year}.`;
+  }
+  document.querySelectorAll('input[name=moments]').forEach(r => r.addEventListener('change', () => { filter = r.value; draw(); }));
+  draw();
+
+  const records = all.filter(m => m.kind === 'record').length, print = all.length - records;
+  const people = new Set(all.map(m => m.i)).size;
+  $('#moments-lede').textContent = `Most of this tree holds nothing but a name and a year or two. ${fmt(all.length)} moments carry a date, or come from something somebody printed: ${fmt(records)} dates from pages read for this page, many of them exact to the day, and ${fmt(print)} items found in old newspapers and books. Together they cover ${fmt(people)} of your ancestors, from ${all[0].year} to ${all[all.length - 1].year}, and they are the parts of this page that rest on something you can go and look at.`;
+})();
+
+/* ---- 45-names.js ---- */
+/* Names that moved: surname spellings that change from parent to child, and one line of patronymic names read down. */
+(function names(){
+  const tb = $('#drift-table tbody');
+  if (!tb) return;
+  const pick = i => document.dispatchEvent(new CustomEvent('ptoy:select', { detail: i }));
+  const who = i => { const b = el('button', { type: 'button', class: 'who' }, T.n[i]); b.addEventListener('click', () => pick(i)); return b; };
+  const plain = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/ø/gi, 'o').replace(/æ/gi, 'ae').replace(/å/gi, 'a').toLowerCase();
+  const words_ = s => (s || '').replace(/\s+/g, ' ').trim().split(' ');
+  const surname = s => { const w = words_(s); return w.length > 1 ? w[w.length - 1] : ''; };
+  const firstName = i => words_(T.n[i])[0] || '';
+  const PATRO = /(s?sen|s?son|s?datter|s?dotter|sdtr|sdr)$/i;
+
+  /* ---- spellings that changed from father to child ---- */
+  const drift = [];
+  for (let i = 0; i < N; i++){
+    const f = T.fa[i];
+    if (f < 0 || living(i) || !T.b[i] || T.b[i] < 1600) continue;
+    const a = surname(T.n[f]), b = surname(T.n[i]);
+    if (!a || !b || a === b) continue;
+    if (PATRO.test(a) || PATRO.test(b)) continue;                 // patronymics change by design; the ladder below explains them
+    const pa = plain(a), pb = plain(b);
+    if (pa === pb || pa.slice(0, 3) !== pb.slice(0, 3)) continue;  // only the same name spelled differently
+    drift.push({ i, f, a, b });
+  }
+  drift.sort((x, y) => (T.b[y.i] || 0) - (T.b[x.i] || 0));
+  drift.slice(0, 14).forEach(d => tb.append(el('tr', {},
+    el('th', { scope: 'row' }, who(d.f), el('div', { class: 'cap', style: 'margin:0' }, d.a)),
+    el('td', {}, who(d.i), el('div', { class: 'cap', style: 'margin:0' }, d.b)),
+    el('td', { class: 'n' }, T.b[d.i] || '—'),
+    el('td', {}, cap(SIDE_WORDS[T.side[d.i]])))));
+  $('#drift-cap').textContent = drift.length > 14
+    ? `The fourteen most recent of ${fmt(drift.length)} such changes in your tree. Patronymics, which change with every generation on purpose, are left out here.`
+    : `${cap(words(drift.length))} ${drift.length === 1 ? 'change' : 'changes'} of spelling from father to child, among ancestors born from 1600 on. Patronymics, which change with every generation on purpose, are left out here.`;
+
+  /* ---- one line of patronymic names ---- */
+  const isPatro = i => { const w = words_(T.n[i]); return w.length > 1 && w.slice(1).some(x => PATRO.test(x)); };
+  const stemOf = i => { const w = words_(T.n[i]), at = w.findIndex((x, j) => j > 0 && PATRO.test(x)); return at < 0 ? '' : w[at].replace(PATRO, ''); };
+  const fitsFather = (child, father) => {                       // "Bårdson" fits a father called Bård, or Gnupa-Bard
+    const stem = plain(stemOf(child));
+    if (stem.length < 3) return false;
+    return words_(T.n[father]).flatMap(w => plain(w).split(/[-–]/)).some(part => part.startsWith(stem.slice(0, 4)) || stem.startsWith(part.slice(0, 4)));
+  };
+  const chains = [];
+  for (let start = 0; start < N; start++){
+    if (!isPatro(start) || living(start)) continue;
+    const chain = [start];
+    let cur = start;
+    while (true){
+      const f = T.fa[cur];
+      if (f < 0 || !isPatro(f)) break;
+      chain.push(f);
+      cur = f;
+    }
+    if (chain.length >= 4) chains.push(chain);
+  }
+  const score = c => {                                          // a real patronymic line: in the era they were used, and mostly matching the fathers
+    const links = c.length - 1, fits = c.filter((i, k) => k < links && fitsFather(i, c[k + 1])).length;
+    const youngest = T.b[c[0]] || 0;
+    if (youngest < 1600 || fits * 10 < links * 6) return -1;    // names that merely end in -sen, such as a place, never reach this
+    return c.length;
+  };
+  const best = chains.map(c => ({ c, s: score(c) })).filter(x => x.s > 0).sort((a, b) => b.s - a.s).map(x => x.c)[0] || [];
+  const block = $('#ladder-block');
+  if (best.length < 4){
+    if (block) block.remove();
+  } else {
+    const rungs = best.slice().reverse();                       // oldest first
+    const ladder = $('#ladder');
+    rungs.forEach((i, k) => {
+      const w = words_(T.n[i]);
+      const patroAt = w.findIndex((x, j) => j > 0 && PATRO.test(x));
+      const line = el('span', { class: 'nameline' });
+      w.forEach((tok, j) => {
+        const cls = j === patroAt ? 'tok-patro' : patroAt >= 0 && j > patroAt ? 'tok-farm' : 'tok-given';
+        line.append(el('span', { class: cls }, tok));
+      });
+      const father = rungs[k - 1];
+      const stem = patroAt >= 0 ? w[patroAt].replace(PATRO, '') : '';
+      const notes = [];
+      if (father != null){
+        const fits = stem && fitsFather(i, father);
+        notes.push(`${stem ? `“${w[patroAt]}” says child of ${stem}` : 'No patronymic recorded'}${stem ? fits ? `, and the father above is ${firstName(father)}: it fits` : `, but the father above is recorded as ${firstName(father)}: it doesn’t fit` : ''}.`);
+        const farmA = patroAt >= 0 && patroAt < w.length - 1 ? w.slice(patroAt + 1).join(' ') : '';
+        const fw = words_(T.n[father]);
+        const fPatroAt = fw.findIndex((x, j) => j > 0 && PATRO.test(x));
+        const farmB = fPatroAt >= 0 && fPatroAt < fw.length - 1 ? fw.slice(fPatroAt + 1).join(' ') : '';
+        if (farmA && farmB && plain(farmA) !== plain(farmB)) notes.push(`The farm name changed from ${farmB} to ${farmA}, which usually means the family moved.`);
+        else if (farmA && !farmB) notes.push(`A farm name appears here for the first time: ${farmA}.`);
+      }
+      const body = el('div', {}, line);
+      const b = el('button', { type: 'button', class: 'who' }, 'find in the circle');
+      b.addEventListener('click', () => pick(i));
+      body.append(el('div', { class: 'note' }, notes.join(' ') || 'The oldest name on this line.', ' ', b));
+      ladder.append(el('li', { class: 'rung' }, el('div', { class: 'yr' }, T.b[i] ? T.b[i] : '—'), body));
+    });
+    $('#ladder-key').append(
+      el('li', {}, el('span', { class: 'nameline', style: 'font-size:16px' }, el('span', { class: 'tok-patro' }, 'Rasmussen')), ' son or daughter of…'),
+      el('li', {}, el('span', { class: 'nameline', style: 'font-size:16px' }, el('span', { class: 'tok-farm' }, 'Sevheim')), ' a farm name, or a surname'));
+    const top = rungs[0], bottom = rungs[rungs.length - 1];
+    $('#ladder-lede').textContent = `Before about 1900 a Norwegian name carried two parts that could differ from a parent’s: a patronymic, fixed at birth, saying whose child you were, and a farm name that changed when the family moved. Norway required fixed family names only from 1923. This is the longest such line in your tree, ${words(rungs.length)} generations of it, from ${T.n[top]} down to ${T.n[bottom]}. Each name below is split into its parts, and each note says whether the patronymic fits the father recorded above it.`;
+    const fits = rungs.filter((i, k) => k > 0 && fitsFather(i, rungs[k - 1])).length;
+    $('#ladder-cap').textContent = `${cap(words(fits))} of the ${words(rungs.length - 1)} links on this line have a patronymic that matches the father recorded above. Where one doesn’t, it can be a spelling, a stepfather, or a wrong link in the tree.`;
+  }
+
+  const patroPeople = (() => { let n = 0; for (let i = 0; i < N; i++) if (isPatro(i)) n++; return n; })();
+  $('#names-lede').textContent = `Nobody in this tree chose their own spelling. Names were written by clerks and priests, copied by hand, and typed in again by whoever built the profile. ${fmt(patroPeople)} of your ancestors carry a patronymic, a name made from their father’s first name, and ${fmt(drift.length)} children are recorded with a surname spelled differently from their father’s.`;
 })();
 
 })();
